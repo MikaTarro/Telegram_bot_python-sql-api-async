@@ -20,6 +20,7 @@ async def start_bot(bot: Bot):
 dp.startup.register(start_bot)
 
 
+# даем проверку на ошибку : если что-то НЕ ТО , то бот= break.
 async def start():
     try:
         await dp.start_polling(bot, skip_updates=True)
