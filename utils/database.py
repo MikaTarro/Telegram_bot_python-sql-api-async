@@ -13,7 +13,7 @@ class Database():
                      "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                      "user_name TEXT,"
                      "user_phone TEXT,"
-                     "telegram_id TEXT;")
+                     "telegram_id TEXT);")
             self.cursor.execute(query)
             self.connection.commit()
         except sqlite3.Error as Error:
@@ -24,6 +24,9 @@ class Database():
                             (user_name, user_phone, telegram_id))
         self.connection.commit()
 
+    def select_user_id(self, telegram_id):
+        users = self.cursor.execute("SELECT * FROM users WHERE telegram_id = ?", (telegram_id,))
+        return users.fetchone()
     def __del__(self):
         self.cursor.close()
         self.connection.close()

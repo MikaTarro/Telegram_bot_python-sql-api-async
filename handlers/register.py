@@ -7,9 +7,14 @@ from utils.database import Database
 
 
 async def start_register(message: Message, state: FSMContext):
-    await message.answer(f'🐣Давай начнем регистрацию!🐥\n'
-                         f'Для начала скажите, как я могу к вам обращаться ?☘️')
-    await state.set_state(RegisterState.regName)
+    db = Database(os.getenv('DATABASE_NAME'))
+    users = db.select_user_id(message.from_user.id)
+    if (users):
+        await message.answer(f'{users[1]} \n 🫵 Chill -> Иди за Кофе! ☕️\n ✅Уже зарегистрированы')
+    else:
+        await message.answer(f'🐣Давай начнем регистрацию!🐥\n'
+                             f'Для начала скажите, как я могу к вам обращаться ?☘️')
+        await state.set_state(RegisterState.regName)
 
 
 async def register_name(message: Message, state: FSMContext):
