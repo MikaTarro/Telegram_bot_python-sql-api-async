@@ -2,6 +2,8 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from state.register import RegisterState
 import re
+import os
+from utils.database import Database
 
 
 async def start_register(message: Message, state: FSMContext):
@@ -27,6 +29,8 @@ async def register_phone(message: Message, state: FSMContext):
         reg_phone = reg_data.get('regphone')
         msg = f'🤖Приятно познакомиться 👑 {reg_name.title()} 👑 \n\n📱Ваш номер телефона {reg_phone}'
         await message.answer(msg)
+        db = Database(os.getenv('DATABASE_NAME'))
+        db.add_user(reg_name, reg_phone, message.from_user.id)
         await state.clear()
 
     else:
