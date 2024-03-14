@@ -1,13 +1,15 @@
-import asyncio
-import os
-
 from aiogram import Bot, Dispatcher, F
+import asyncio
 from dotenv import load_dotenv
+import os
+from aiogram.filters import Command
+
 from utils.commands import set_commands
 from handlers.start import get_start
 from state.register import RegisterState
 from handlers.register import start_register, register_name, register_phone
-from aiogram.filters import Command
+from handlers.admin.create import create_event
+from filters.CheckAdmin import CheckAdmin
 
 # навести порядок в импортах!!
 load_dotenv()
@@ -32,7 +34,7 @@ from aiogram.filters import CommandStart
 
 
 async def start_bot(bot: Bot):
-    await bot.send_message(admin_id, text='🤖C-3PO был запущен')
+    await bot.send_message(1375989844, text='🤖C-3PO был запущен')
 
 
 dp.startup.register(start_bot)
@@ -43,6 +45,8 @@ dp.message.register(get_start, Command(commands='start'))
 dp.message.register(start_register, F.text=='🛫Давай зарегистрируем тебя!🛬')
 dp.message.register(register_name, RegisterState.regName)
 dp.message.register(register_phone, RegisterState.regPhone)
+#хэндлер создание события
+dp.message.register(create_event, Command(commands='create'), CheckAdmin())
 
 
 """ даем проверку на ошибку : если что-то НЕ ТО , то бот= break. """
