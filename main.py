@@ -47,7 +47,7 @@ dp.message.register(start_register, F.text=='🛫Давай зарегистри
 dp.message.register(register_name, RegisterState.regName)
 dp.message.register(register_phone, RegisterState.regPhone)
 #хэндлер создание события
-dp.message.register(create_event, Command(commands='create'), CheckAdmin())
+dp.message.register(create_event, Command(commands='help'), CheckAdmin())
 dp.callback_query.register(select_place, CreateState.place)
 dp.callback_query.register(select_date, CreateState.date)
 dp.callback_query.register(select_time, CreateState.time)
