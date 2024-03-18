@@ -16,7 +16,7 @@ async def set_commands(bot: Bot):
         ),
         BotCommand(
             command='help',
-            description='Помощь в работе Бота.'
+            description='Бронируем Дату-Время.'
         )
     ]
 
