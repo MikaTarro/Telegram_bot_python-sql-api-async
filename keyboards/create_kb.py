@@ -13,18 +13,20 @@ def place_kb():
     kb.adjust(1)
     return kb.as_markup()
 
+
 def date_kb():
     kb = InlineKeyboardBuilder()
     current_date = datetime.date.today()
-    for i in range (7):
+    for i in range(7):
         current_date += datetime.timedelta(days=1)
         kb.button(text=f"{current_date.strftime('%d.%m')}", callback_data=f"{current_date.strftime('%d.%m.%y')}")
     kb.adjust(1)
     return kb.as_markup()
 
+
 def time_kb():
     kb = InlineKeyboardBuilder()
-    for x in range (9, 23, 1):
+    for x in range(9, 23, 1):
         kb.button(text=f"{x}:00", callback_data=f"time_{x}:00")
     kb.adjust(1)
     return kb.as_markup()

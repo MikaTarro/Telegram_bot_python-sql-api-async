@@ -33,4 +33,4 @@ async def select_time(call: CallbackQuery, state: FSMContext):
     await call.message.edit_reply_markup(reply_markup=None)
     await call.message.answer(f'Отлично! Я всё записал!')
     create_data = await state.get_data()
-    print(place_kb, create_data)
+    print(create_data)

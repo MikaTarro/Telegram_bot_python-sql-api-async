@@ -33,7 +33,7 @@ class Database():
                             (user_name, user_phone, telegram_id))
         self.connection.commit()
 
-    def add_event(self, user_name, user_phone, telegram_id):
+    def add_event(self, place_id, date_event, time_event):
         self.cursor.execute(f"INSERT INTO events (place_id, date_event, time_event) VALUES (?,?,?)",
                             (place_id, date_event, time_event))
         self.connection.commit()
