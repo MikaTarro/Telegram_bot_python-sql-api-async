@@ -33,8 +33,10 @@ class Database():
                             (user_name, user_phone, telegram_id))
         self.connection.commit()
 
-    def add_events(self, place_id, date_event, time_event):
-        self.cursor.execute(f"INSERT INTO events (place_)")
+    def add_event(self, user_name, user_phone, telegram_id):
+        self.cursor.execute(f"INSERT INTO events (place_id, date_event, time_event) VALUES (?,?,?)",
+                            (place_id, date_event, time_event))
+        self.connection.commit()
 
     def select_user_id(self, telegram_id):
         users = self.cursor.execute("SELECT * FROM users WHERE telegram_id = ?", (telegram_id,))
