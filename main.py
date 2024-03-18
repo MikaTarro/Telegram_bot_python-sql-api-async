@@ -7,8 +7,9 @@ from aiogram.filters import Command
 from utils.commands import set_commands
 from handlers.start import get_start
 from state.register import RegisterState
+from state.create import CreateState
 from handlers.register import start_register, register_name, register_phone
-from handlers.admin.create import create_event
+from handlers.admin.create import create_event, select_place, select_date, select_time
 from filters.CheckAdmin import CheckAdmin
 
 # навести порядок в импортах!!
@@ -47,6 +48,9 @@ dp.message.register(register_name, RegisterState.regName)
 dp.message.register(register_phone, RegisterState.regPhone)
 #хэндлер создание события
 dp.message.register(create_event, Command(commands='create'), CheckAdmin())
+dp.callback_query.register(select_place, CreateState.place)
+dp.callback_query.register(select_date, CreateState.date)
+dp.callback_query.register(select_time, CreateState.time)
 
 
 """ даем проверку на ошибку : если что-то НЕ ТО , то бот= break. """
@@ -62,4 +66,3 @@ async def start():
 
 if __name__ == '__main__':
     asyncio.run(start())
-#22.20
