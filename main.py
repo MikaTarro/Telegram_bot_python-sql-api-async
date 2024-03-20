@@ -36,7 +36,7 @@ from aiogram.filters import CommandStart
 
 
 async def start_bot(bot: Bot):
-    await bot.send_message(1375989844, text='🤖C-3PO был запущен')
+    await bot.send_message(1375989844, text='🤖Ro-Bot был запущен')
 
 
 dp.startup.register(start_bot)

@@ -15,6 +15,6 @@ async def get_start(message: Message, bot: Bot):
     if (users):
         await bot.send_message(message.from_user.id, f'Привет {users[1]}!', reply_markup=profile_kb)
     else:
-        await bot.send_message(message.from_user.id, f'🤖бот бот!🤖 \n'
-                                                 f'🚀помогу записать тебя в бассейн 🤓 \n'
+        await bot.send_message(message.from_user.id, f'🤖я Ro-Bot!🤖 \n'
+                                                 f'🚀Помогу записать тебя в бассейн 🤓 \n'
                                                  f'💫запись открыта на неделю вперед🌍 время с 9 до 22🎩🪄\n\n\n', reply_markup=register_keyboard)

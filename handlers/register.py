@@ -15,7 +15,7 @@ async def start_register(message: Message, state: FSMContext, bot: Bot):
                                f'{users[1]} \n 🫵 Chill -> Иди за Кофе! ☕️\n ✅Уже зарегистрированы')
     else:
         await bot.send_message(message.from_user.id,f'🐣Давай начнем регистрацию!🐥\n'
-                             f'Для начала скажите, как я могу к вам обращаться ?☘️')
+                             f'🤖Для начала скажите, как я могу к вам обращаться ❔')
         await state.set_state(RegisterState.regName)
 
 
