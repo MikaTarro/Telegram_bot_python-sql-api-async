@@ -4,6 +4,8 @@ from aiogram.fsm.context import FSMContext
 from keyboards.create_kb import place_kb, date_kb, time_kb
 
 from state.create import CreateState
+from utils.database import Database
+import os
 
 
 async def create_event(message: Message, state: FSMContext, bot: Bot):
@@ -14,6 +16,7 @@ async def create_event(message: Message, state: FSMContext, bot: Bot):
 async def select_place(call: CallbackQuery, state: FSMContext):
     await call.message.answer(f'Место выбрано ! \n'
                               f'Давайте выберем дату', reply_markup=date_kb())
+    await state.update_data(place=call.data)
     await call.message.edit_reply_markup(reply_markup=None)
     await call.answer()
     await state.set_state(CreateState.date)
@@ -33,4 +36,8 @@ async def select_time(call: CallbackQuery, state: FSMContext):
     await call.message.edit_reply_markup(reply_markup=None)
     await call.message.answer(f'Отлично! Я всё записал!')
     create_data = await state.get_data()
+    create_time = create_data.get('time').split('_')[1]
+    db = Database(os.getenv('DATABASE_NAME'))
+    db.add_event(create_data['place'], create_data['date'], create_time)
+    await state.clear()
     print(create_data)

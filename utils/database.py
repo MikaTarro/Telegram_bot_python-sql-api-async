@@ -42,6 +42,11 @@ class Database():
         users = self.cursor.execute("SELECT * FROM users WHERE telegram_id = ?", (telegram_id,))
         return users.fetchone()
 
+    def db_select_column(self, table_name, column, item):
+        result = self.cursor.execute("SELECT * FROM {} WHERE {} = {}".format(table_name, column, item))
+        return result
+
+
     def db_select_all(self, table_name):
         result = self.cursor.execute("SELECT * FROM {}".format(table_name))
         return result.fetchall()
