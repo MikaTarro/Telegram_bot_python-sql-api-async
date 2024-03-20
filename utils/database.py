@@ -9,20 +9,20 @@ class Database():
 
     def create_db(self):
         try:
-            query = ("CREATE TABLE IF NOT EXISTS users("
-                     "id INTEGER PRIMARY KEY,"
-                     "user_name TEXT,"
-                     "user_phone TEXT,"
-                     "telegram_id TEXT);"
-                     "CREATE TABLE IF NOT EXISTS place("
-                     "id INTEGER PRIMARY KEY,"
-                     "name_place TEXT,"
-                     "place_address TEXT);"
-                     "CREATE TABLE IF NOT EXISTS events("
-                     "id INTEGER PRIMARY KEY,"
-                     "place_id TEXT,"
-                     "date_event TEXT,"
-                     "time_event TEXT)")
+            query = ("""CREATE TABLE IF NOT EXISTS users(
+                         id INTEGER PRIMARY KEY,
+                         user_name TEXT,
+                         user_phone TEXT,
+                         telegram_id TEXT);
+                         CREATE TABLE IF NOT EXISTS place(
+                         id INTEGER PRIMARY KEY,
+                         name_place TEXT,
+                         place_address TEXT);
+                         CREATE TABLE IF NOT EXISTS events(
+                         id INTEGER PRIMARY KEY,
+                         place_id TEXT,
+                         date_event TEXT,
+                         time_event TEXT)""")
             self.cursor.executescript(query)
             self.connection.commit()
         except sqlite3.Error as Error:
@@ -45,7 +45,6 @@ class Database():
     def db_select_column(self, table_name, column, item):
         result = self.cursor.execute("SELECT * FROM {} WHERE {} = {}".format(table_name, column, item))
         return result
-
 
     def db_select_all(self, table_name):
         result = self.cursor.execute("SELECT * FROM {}".format(table_name))
