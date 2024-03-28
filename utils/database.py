@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class Database():
+class Database:
     def __init__(self, db_name):
         self.connection = sqlite3.connect(db_name)
         self.cursor = self.connection.cursor()
@@ -48,6 +48,23 @@ class Database():
 
     def db_select_all(self, table_name):
         result = self.cursor.execute("SELECT * FROM {}".format(table_name))
+        return result.fetchall()
+
+    def select_events(self, status, data_event):
+        result = self.cursor.execute(
+            "SELECT * FROM 'events' JOIN 'place' ON place_id = place.id WHERE 'status' = '{}' AND 'date_event' = '{}'"
+            .format(status, data_event))
+        return result.fetchall()
+
+    def select_person(self, event_id): # соединяем 2 таблицы по полю телеграм Айди
+        result = self.cursor.execute(
+            "SELECT * FROM 'record_events' JOIN 'users' ON 'record_events'.'user_telegram_id' = 'users'.'telegram_id' WHERE 'record_events'.'event_id' = {}"
+            .format(event_id))
+        return result.fetchall()
+
+    def check_user(self, event_id, user_id):
+        result = self.cursor.execute(
+            "SELECT * FROM 'record_events' WHERE 'event_id' = {} AND 'user_telegram_id' = {}".format(event_id, user_id))
         return result.fetchall()
 
     def __del__(self):

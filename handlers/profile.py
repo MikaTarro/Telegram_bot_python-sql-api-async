@@ -1,16 +1,35 @@
 from aiogram import Bot
-from aiogram.types import Message
+from aiogram.types import Message, CallbackQuery
 from utils.database import Database
 import os
+from keyboards.profile_kb import date_kb, add_event, delete_event
+from utils.function import list_gamer
 
 
-async def viewn_profile(message: Message, bot: Bot):
-    db = Database(os.getenv('DATABASE_NAME'))
-    events = db.db_select_column('events', 'status', 0)
-    if(events):
-        await bot.send_message(message.from_user.id, f'🤖Ваши брони:')
+async def viewn_event(message: Message, bot=Bot):
+    await bot.send_message(message.from_user.id, f"Выберите дату события", reply_markup=date_kb())
+
+
+async def viewn_event_date(call: CallbackQuery):
+    await call.answer()
+    date = call.data.split("_")[-1]
+    db = Database(os.getenv('DATABASE_NAME'))  # подключились к БД
+    events = db.select_events('0', date)  # в евентс передаем ФУНКЦИЮ с событиями с датой
+    if (events):  # если в Евентс что то есть, то выводим через цикл FOR
+        # создаем таблицу РЕКОРДС инфо о ЗАПИСАВШИХСЯ НА ИВЕНТ\событие
+        await call.message.answer(f'Актуальные события:')
+
         for event in events:
-            await bot.send_message(message.from_user.id, f'🤖Записал вас на: {event[2]} число, время: {event[3]} \n\n'
-                                                         f'\t\t🐋Стоимость сеанса 2000 рублей🐋.')
-    else:
-        await bot.send_message(message.from_user.id, f'🤖В настоящее время записей нет.')
+            persons = db.select_person(event[0])  # данные об людях записанных на событие
+            gamers = list_gamer(persons)
+
+        msg = (f'Событие состоится: {event[9]} (Адрес: {event[10]} \n\n'
+               f'{event[2]} в {event[3]}\n\n'
+               f'{gamers}')
+
+        if not (db.check_user(event[0], call.from_user.id)):  # Если человек НЕ записался то выводим кнопку с записью
+            await call.message.answer(msg, reply_markup=add_event(event[0], call.from_user.id))
+        else:  # Если он ЗАПИСАН то добавляем копку с удалением записи
+            await call.message.answer(msg, reply_markup=delete_event(event[0], call.from_user.id))
+    else:  # Если никто не бронировал дату то Сообщим
+        await call.message.answer(f'В выбранную дату записей нет')
