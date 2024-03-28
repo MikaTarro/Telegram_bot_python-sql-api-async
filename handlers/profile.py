@@ -8,6 +8,8 @@ from utils.function import list_gamer
 
 async def viewn_event(message: Message, bot=Bot):
     await bot.send_message(message.from_user.id, f"Выберите дату события", reply_markup=date_kb())
+
+
 # тут он выводит выбор даты , а дальше не работает ...
 
 async def viewn_event_date(call: CallbackQuery):
@@ -20,12 +22,14 @@ async def viewn_event_date(call: CallbackQuery):
         await call.message.answer(f'Актуальные события:')
         for event in events:
             persons = db.select_person(event[0])  # данные об людях записанных на событие
-            gamers = list_gamer(persons) # создаем список участников function.py
+            gamers = list_gamer(persons)  # создаем список участников function.py
             msg = (f'Событие состоится: {event[9]} (Адрес: {event[10]} \n\n'
                    f'{event[2]} в {event[3]}\n\n'
                    f'{gamers}')
 
-            if not (db.check_user(event[0], call.from_user.id)):  # Если человек НЕ записался то выводим кнопку с записью
+            if not (
+                    db.check_user(event[0],
+                                  call.from_user.id)):  # Если человек НЕ записался то выводим кнопку с записью
                 await call.message.answer(msg, reply_markup=add_event(event[0], call.from_user.id))
             else:  # Если он ЗАПИСАН то добавляем копку с удалением записи
                 await call.message.answer(msg, reply_markup=delete_event(event[0], call.from_user.id))
