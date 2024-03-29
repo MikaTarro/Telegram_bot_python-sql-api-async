@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e4073e1-efa0-4699-93b3-f5faf25924c6" name="Changes" comment="...">
+      <change afterPath="$PROJECT_DIR$/handlers/balance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.template" beforeDir="false" afterPath="$PROJECT_DIR$/.env.template" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/49044f01-5168-452d-925f-dc5c0a555d8c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/49044f01-5168-452d-925f-dc5c0a555d8c.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handlers/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/handlers/profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboards/create_kb.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards/create_kb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keyboards/profile_kb.py" beforeDir="false" afterPath="$PROJECT_DIR$/keyboards/profile_kb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tgbot_db.db" beforeDir="false" afterPath="$PROJECT_DIR$/tgbot_db.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +162,8 @@
       <workItem from="1711449560930" duration="428000" />
       <workItem from="1711450036464" duration="1030000" />
       <workItem from="1711511258164" duration="5306000" />
-      <workItem from="1711598149913" duration="13733000" />
+      <workItem from="1711598149913" duration="16227000" />
+      <workItem from="1711685806862" duration="5805000" />
     </task>
     <task id="LOCAL-00001" summary="...">
       <option name="closed" value="true" />
@@ -334,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711611128448</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="...">
+      <option name="closed" value="true" />
+      <created>1711611968178</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1711611968178</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,7 +374,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TARO_Mbot$main.coverage" NAME="main Coverage Results" MODIFIED="1711611888096" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TARO_Mbot$main.coverage" NAME="main Coverage Results" MODIFIED="1711690880590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TARO_Mbot$database.coverage" NAME="database Coverage Results" MODIFIED="1710750940840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
   </component>
 </project>

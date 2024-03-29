@@ -58,7 +58,7 @@ class Database:
 
     def select_person(self, event_id): # соединяем 2 таблицы по полю телеграм Айди
         result = self.cursor.execute(
-            "SELECT * FROM 'record_events' JOIN 'users' ON 'record_events'.'user_telegram_id' = 'users'.'telegram_id' WHERE 'record_events'.'event_id' = {}"
+            "SELECT * FROM 'record_events' JOIN 'users' ON 'record_events'.'user_telegram_id' = 'users'.'telegram_id' WHERE 'record_events'.'event_id' ={}"
             .format(event_id))
         return result.fetchall()
 
@@ -66,6 +66,19 @@ class Database:
         result = self.cursor.execute(
             "SELECT * FROM 'record_events' WHERE 'event_id' = {} AND 'user_telegram_id' = {}".format(event_id, user_id))
         return result.fetchall()
+
+    # БАЛАНС
+    def balance_user_edit(self, user_id, balance):
+        self.cursor.execute(f"UPDATE 'users' SET 'balance' = ? WHERE telegram_id = ?",
+                            (balance, user_id))
+        self.connection.commit()
+
+    def balance_system(self, operation, user_id):
+        self.cursor.execute(f"INSERT INTO 'balance_system' (operation, user_id) VALUES (?, ?)",
+                            (operation, user_id))
+        self.connection.commit()
+
+
 
     def __del__(self):
         self.cursor.close()

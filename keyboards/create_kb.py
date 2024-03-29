@@ -26,7 +26,7 @@ def date_kb():
 
 def time_kb():
     kb = InlineKeyboardBuilder()
-    for x in range(9, 23, 1):
+    for x in range(9, 23, 3):
         kb.button(text=f"{x}:00", callback_data=f"time_{x}:00")
     kb.adjust(1)
     return kb.as_markup()

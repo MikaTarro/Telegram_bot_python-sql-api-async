@@ -6,6 +6,8 @@ def profile_kb():
     kb = ReplyKeyboardBuilder()
     kb.button(text="Актуальные события")
     kb.button(text="Мои события")
+    kb.button(text="Баланс")
+    kb.button(text="История событий")
     kb.adjust(2)
     return kb.as_markup(resize_keyboard=True, one_time_keyboard=True, input_field_placeholder='Выберите действие⬇️')
 
@@ -31,5 +33,11 @@ def add_event(event_id, user_id):  # добавить запись
 def delete_event(event_id, user_id):  # удалить запись
     kb = InlineKeyboardBuilder()
     kb.button(text=f'Удалить Запись', callback_data=f'delete_event_{event_id}_{user_id}')
+    kb.adjust(1)
+    return kb.as_markup()
+
+def balance_kb():
+    kb = InlineKeyboardBuilder()
+    kb.button(text='💸 Пополнить баланс 💸', callback_data=f'add_balance')
     kb.adjust(1)
     return kb.as_markup()
