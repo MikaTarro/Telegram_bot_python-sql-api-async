@@ -14,10 +14,11 @@ async def viewn_event(message: Message, bot=Bot):
 
 async def viewn_event_date(call: CallbackQuery):
     await call.answer()
-    date = call.data.split("_")[-1]
+    date = call.data.split("_")[-1] # делим строку даты по нижнему подчерк и берем последний элемент
     db = Database(os.getenv('DATABASE_NAME'))  # подключились к БД
     events = db.select_events('0', date)  # в евентс передаем ФУНКЦИЮ с Статус=0 и Датой
-    if events:  # если в Евентс что то есть, то выводим информацию через цикл FOR
+
+    if (events):  # если в Евентс что то есть, то выводим информацию через цикл FOR
         # создаем таблицу РЕКОРДС инфо о ЗАПИСАВШИХСЯ НА ИВЕНТ\событие
         await call.message.answer(f'Актуальные события:')
         for event in events:

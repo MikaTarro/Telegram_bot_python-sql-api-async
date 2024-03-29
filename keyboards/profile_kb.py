@@ -5,9 +5,9 @@ import datetime
 def profile_kb():
     kb = ReplyKeyboardBuilder()
     kb.button(text="Актуальные события")
-    kb.button(text="Мои события")
+    kb.button(text="Мои события") #TODO
     kb.button(text="Баланс")
-    kb.button(text="История событий")
+    kb.button(text="История событий") #TODO
     kb.adjust(2)
     return kb.as_markup(resize_keyboard=True, one_time_keyboard=True, input_field_placeholder='Выберите действие⬇️')
 

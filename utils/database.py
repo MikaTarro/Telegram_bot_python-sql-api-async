@@ -50,6 +50,7 @@ class Database:
         result = self.cursor.execute("SELECT * FROM {}".format(table_name))
         return result.fetchall()
 
+    # select events добавляем к таблице евент название и адрес Бассейна
     def select_events(self, status, data_event):
         result = self.cursor.execute(
             "SELECT * FROM 'events' JOIN 'place' ON place_id = place.id WHERE 'status' = '{}' AND 'date_event' = '{}'"
@@ -64,7 +65,8 @@ class Database:
 
     def check_user(self, event_id, user_id):
         result = self.cursor.execute(
-            "SELECT * FROM 'record_events' WHERE 'event_id' = {} AND 'user_telegram_id' = {}".format(event_id, user_id))
+            "SELECT * FROM 'record_events' WHERE 'event_id' = {} AND 'user_telegram_id' = {}"
+            .format(event_id, user_id))
         return result.fetchall()
 
     # БАЛАНС
