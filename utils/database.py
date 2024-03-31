@@ -53,11 +53,11 @@ class Database:
     # select events добавляем к таблице евент название и адрес Бассейна
     def select_events(self, status, data_event):
         result = self.cursor.execute(
-            "SELECT * FROM 'events' JOIN 'place' ON place_id = place.id WHERE 'status' = '{}' AND 'date_event' = '{}'"
+            "SELECT * FROM events JOIN place ON place_id = place.id WHERE events.status = '{}' AND events.date_event = '{}'"
             .format(status, data_event))
         return result.fetchall()
 
-    def select_person(self, event_id): # соединяем 2 таблицы по полю телеграм Айди
+    def select_person(self, event_id): # с оединяем 2 таблицы по полю телеграм Айди
         result = self.cursor.execute(
             "SELECT * FROM 'record_events' JOIN 'users' ON 'record_events'.'user_telegram_id' = 'users'.'telegram_id' WHERE 'record_events'.'event_id' ={}"
             .format(event_id))

@@ -6,5 +6,5 @@ def list_gamer(persons):
             gamers.append(persons)
         gamers = '\n'.join(gamers)
     else:
-        gamers = 'На это событие нет записей'
+        gamers = 'На это событие никто не записан'
     return gamers

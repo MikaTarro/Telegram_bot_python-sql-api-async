@@ -24,9 +24,10 @@ async def viewn_event_date(call: CallbackQuery):
         for event in events:
             persons = db.select_person(event[0])  # данные об людях записанных на событие
             gamers = list_gamer(persons)  # создаем список участников function.py
-            msg = (f'Событие состоится: {event[9]} (Адрес: {event[10]} \n\n'
-                   f'{event[2]} в {event[3]}\n\n'
-                   f'{gamers}')
+            msg = (f'🤖Событие состоится: \n\n'
+                   f'🏬{event[9]} (Адрес: {event[10]}) \n\n'
+                   f'📆{event[2]} в {event[3]}\n\n'
+                   f'💭{gamers}')
 
             if not (
                     db.check_user(event[0],
@@ -35,4 +36,4 @@ async def viewn_event_date(call: CallbackQuery):
             else:  # Если он ЗАПИСАН то добавляем копку с удалением записи
                 await call.message.answer(msg, reply_markup=delete_event(event[0], call.from_user.id))
     else:  # Если никто не бронировал дату то Сообщим
-        await call.message.answer(f'В выбранную дату записей нет')
+        await call.message.answer(f'📝В выбранную дату записей нет')
