@@ -25,14 +25,14 @@ def date_kb():
 
 def add_event(event_id, user_id):  # добавить запись
     kb = InlineKeyboardBuilder()
-    kb.button(text=f'Записаться', callback_data=f'add_event_{event_id}_{user_id}')
+    kb.button(text=f'✅Записаться', callback_data=f'add_event_{event_id}_{user_id}')
     kb.adjust(1)
     return kb.as_markup()
 
 
 def delete_event(event_id, user_id):  # удалить запись
     kb = InlineKeyboardBuilder()
-    kb.button(text=f'Удалить Запись', callback_data=f'delete_event_{event_id}_{user_id}')
+    kb.button(text=f'❌Удалить Запись', callback_data=f'delete_event_{event_id}_{user_id}')
     kb.adjust(1)
     return kb.as_markup()
 

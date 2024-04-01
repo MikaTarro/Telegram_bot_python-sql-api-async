@@ -57,7 +57,25 @@ class Database:
             .format(status, data_event))
         return result.fetchall()
 
-    def select_person(self, event_id): # с оединяем 2 таблицы по полю телеграм Айди
+    def select_event(self, status, event_id):
+        result = self.cursor.execute(
+            "SELECT * FROM events JOIN place ON place_id = place.id WHERE events.status = '{}' AND events.id = '{}'"
+            .format(status, event_id))
+        return result.fetchone()
+
+    def add_user_event(self, event_id, user_telegram_id):
+        self.cursor.execute(f"INSERT INTO record_events(event_id, user_telegram_id) VALUES (?,?)",
+                            (event_id, user_telegram_id))
+        self.connection.commit()
+
+    def delete_user_event(self, event_id, user_telegram_id):
+        self.cursor.execute(f"DELETE"
+                            f" FROM record_events "
+                            f"WHERE record_events.event_id = ? AND record_events.user_telegram_id = ?",
+                            (event_id, user_telegram_id))
+        self.connection.commit()
+
+    def select_person(self, event_id):  # с оединяем 2 таблицы по полю телеграм Айди
         result = self.cursor.execute(
             "SELECT * FROM 'record_events' JOIN 'users' ON 'record_events'.'user_telegram_id' = 'users'.'telegram_id' WHERE 'record_events'.'event_id' ={}"
             .format(event_id))
@@ -79,8 +97,6 @@ class Database:
         self.cursor.execute(f"INSERT INTO 'balance_system' (operation, user_id) VALUES (?, ?)",
                             (operation, user_id))
         self.connection.commit()
-
-
 
     def __del__(self):
         self.cursor.close()

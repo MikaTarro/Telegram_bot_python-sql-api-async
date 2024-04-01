@@ -9,7 +9,7 @@ from handlers.start import get_start
 from handlers.weather import get_weather
 from state.register import RegisterState
 from state.create import CreateState
-from handlers.profile import viewn_event, viewn_event_date
+from handlers.profile import viewn_event, viewn_event_date, add_event_person, delete_event_person
 
 from handlers.register import start_register, register_name, register_phone
 from handlers.admin.create import create_event, select_place, select_date, select_time
@@ -60,8 +60,9 @@ dp.callback_query.register(select_time, CreateState.time)
 # хенд профиля <<Актуальные события\записи>>
 dp.message.register(viewn_event, F.text == 'Актуальные события')
 dp.callback_query.register(viewn_event_date, F.data.startswith('viewn_date_'))
-# добавить событие TODO
-# удалить событие TODO
+dp.callback_query.register(add_event_person, F.data.startswith('add_event'))
+dp.callback_query.register(delete_event_person, F.data.startswith('delete_event'))
+
 # Хэндлеры профиля <<БАЛАНС>>
 dp.message.register(viewn_balance, F.text=='Баланс')
 dp.callback_query.register(add_balance, F.data.startswith('add_balance'))
